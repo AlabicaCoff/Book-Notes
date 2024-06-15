@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title><%= book.name %></title>
+</head>
+<body id="book">
+    <header id="masthead">
+        <a href="/" title="Marchkung123">Marchkung123</a>
+    </header>
+    <main>
+        <header>
+            <figure>
+                <a href="https://www.amazon.com/s?k=<%= book.id %>">
+                    <img src="https://covers.openlibrary.org/b/isbn/<%= book.id %>-S.jpg" loading="lazy" alt="<%= book.name %>">
+                </a>
+            </figure>
+            <h1>
+                <%= book.name %> - by <%= book.author %>
+            </h1>
+            <small>
+                ISBN: <%= book.id %><br>
+                Date read: <%= book.date.toISOString().slice(0, 10) %><br>
+                How strongly I recommend it: <strong><%= book.rating %></strong>/10<br>
+                <strong>(See <a href="/">my list of 360+ books</a>, for more.)</strong>
+            </small>
+            <p>
+                <strong><a href="/book/<%= book.id %>">Read my notes</a></strong>, or go to the <a href="https://www.amazon.com/s?k=<%= book.id %>&amp;">Amazon page</a> for details and reviews.
+            </p>
+        </header>
+        <form action="/book/action/delete/<%= book.id %>" method="post">
+            <a id="edit" class="btn btn-warning" href="/book/action/Edit/<%= book.id %>">Edit</a>
+            <input id="delete" class="btn btn-danger"  type="submit" value="Delete">
+        </form>
+        <p id="booksummary">
+            <%= book.summary %>
+        </p>
+        <h2>
+            MY NOTES
+        </h2>
+        <p id="booknotes">
+            <%- book.note %>
+        </p>
+    </main>
+</body>
+</html>

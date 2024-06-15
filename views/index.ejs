@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>book notes | Marchkung123</title>
+</head>
+<body id="booklist">
+    <header id="masthead">
+        <a href="/" title="Marchkung123">Marchkung123</a>
+    </header>
+    <main>
+        <header>
+            <h1>Books I’ve read</h1>
+        </header>
+        <p id="sorters">Sorted with <strong>my top recommendations up top</strong>. Sort by
+            <a href="/?sort=title" id="sort-title">title</a>,
+            <a href="/?sort=date" id="sort-date">newest</a>, or
+            <a href="/?sort=rating" id="sort-rating">best</a>.
+        </p>
+        <a class="btn btn-primary" href="/book/action/New">New Book</a>
+        <hr>
+        <section id="allbooks">
+            <% for (let book of allBooks) { %>
+                <div class="abook">
+                    <figure>
+                        <a href="/book/<%= book.id %>">
+                            <img src="https://covers.openlibrary.org/b/isbn/<%= book.id %>-M.jpg" loading="lazy" alt="<%= book.name %>">
+                        </a>
+                    </figure>
+                    <h2>
+                        <a href="/book/<%= book.id %>">
+                            <%= book.name %> - by <%= book.author %>
+                        </a>
+                    </h2>
+                    <small>
+                        Date read: <%= book.date.toISOString().slice(0, 10) %>. How strongly I recommend it: <strong><%= book.rating %></strong>/10
+                    </small>
+                    <form action="/book/action/delete/<%= book.id %>" method="post">
+                        <a id="edit" class="btn btn-warning" href="/book/action/Edit/<%= book.id %>">Edit</a>
+                        <input id="delete" class="btn btn-danger"  type="submit" value="Delete">
+                    </form>
+                    <p>
+                        <%= book.summary %>
+                    </p>
+                    <p>
+                        <strong>
+                            <a href="/book/<%= book.id %>">Read my notes</a></strong>, or go to the <a href="https://www.amazon.com/s?k=<%= book.id %>&amp;">Amazon page</a> for details and reviews.
+                    </p>
+                    <hr>
+                </div>
+            <% } %>
+        </section>
+    </main>
+</body>
+</html>

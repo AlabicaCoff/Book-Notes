@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title><%= action %></title>
+</head>
+<body>
+    <h1><%= action %> Book</h1>
+    <form action="<%= url %>" method="post">
+        <p>Which book have you read?</p>
+        <input type="text" id="name" name="name" placeholder="Sherlock Holmes..." value="<%= locals.book ? book.name : "" %>">
+        
+        <% if (action == "New") { %>
+            <p>What's id of that book?</p>
+            <input type="number" id="id" name="id" placeholder="123456......">
+        <% } %>
+
+        <p>Who is author?</p>
+        <input type="text" id="author" name="author" placeholder="Ben Tennison" value="<%= locals.book ? book.author : "" %>">
+
+        <p>When did you read this book?</p>
+        <input type="date" id="date" name="date" value="<%= locals.book ? book.date.toISOString().slice(0, 10) : "" %>">
+
+        <p>Rate this book (between 0 and 10)</p>
+        <input type="number" min="0" max="10" id="rating" name="rating" placeholder="XX" value="<%= locals.book ? book.rating : "" %>"> / 10
+    
+        <p>Let's summarize this book!</p>
+        <textarea id="summary" name="summary" rows="4" cols="50" 
+        placeholder="Once upon a time. There's a lion in savanna, It's chasing a group of zebras..."><%= locals.book ? book.summary : "" %></textarea>
+
+        <p>Take a note for this book</p>
+        <textarea id="note" name="note" rows="6" cols="50" 
+        placeholder="First time, I have read this book, It's super fantastic fiction that I've never read before. The core is about some boy that have superpower, he has to become a king in near future..."><%= locals.book ? book.note : "" %></textarea>
+
+        <div id="action-links">
+            <input type="submit" value="<%= action %>" class="btn btn-success">
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>
